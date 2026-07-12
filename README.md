@@ -35,7 +35,9 @@ ai_evaluator/
 ├── output/                # Resultados generados (auto-creado)
 ├── examples/              # Archivos de ejemplo para probar
 ├── requirements.txt       # Dependencias del proyecto
-└── .env.example           # Plantilla de variables de entorno
+├── .env.example           # Plantilla de variables de entorno
+├── LICENSE                # Licencia MIT
+└── CHANGELOG.md           # Historial de cambios
 ```
 
 ### Descripción de módulos
