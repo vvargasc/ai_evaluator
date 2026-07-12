@@ -50,8 +50,14 @@ def main() -> None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_file = OUTPUT_DIR / f"analisis_{timestamp}.md"
 
-        output_file.write_text(result, encoding="utf-8")
+        output_file.write_text(result.text, encoding="utf-8")
         logger.info("Resultado guardado en: %s", output_file)
+        logger.info(
+            "Tokens - entrada: %d | salida: %d | total: %d",
+            result.prompt_tokens,
+            result.completion_tokens,
+            result.total_tokens,
+        )
 
     except (FileNotFoundError, ValueError, EnvironmentError) as e:
         logger.error("Error: %s", e)
