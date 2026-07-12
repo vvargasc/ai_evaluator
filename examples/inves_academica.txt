@@ -1,0 +1,14 @@
+Nombre del proyecto: Asistente de Investigación Académica
+Descripción: Una aplicación web que ayuda a estudiantes universitarios a analizar artículos científicos y generar resúmenes personalizados. El sistema debe identificar los temas principales de cada documento, recomendar lecturas relacionadas y producir un borrador de resumen adaptado al estilo del usuario.
+Características principales:
+
+Carga de documentos en PDF y extracción automática de texto.
+
+Análisis semántico para identificar conceptos clave y relaciones entre ellos.
+
+Motor de recomendación que sugiere artículos similares según el área de estudio.
+
+Generación automática de resúmenes en lenguaje natural, con opción de personalización del tono (formal, técnico, divulgativo).
+
+Panel de control con métricas de progreso académico.
+Objetivo: Reducir el tiempo de lectura y mejorar la productividad de los estudiantes mediante una combinación de análisis predictivo y generación de contenido.
