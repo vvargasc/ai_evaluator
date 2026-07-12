@@ -4,6 +4,8 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from src.file_handler import extract_content
 from src.agent import analyze_document
 
