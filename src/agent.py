@@ -1,3 +1,6 @@
+# Copyright (c) 2026 AI Evaluator Contributors
+# SPDX-License-Identifier: MIT
+
 from dataclasses import dataclass
 
 from openai import OpenAI

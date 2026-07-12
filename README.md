@@ -107,3 +107,7 @@ Los resultados se guardan en la carpeta `output/` con el formato `analisis_YYYYM
 ## Personalización
 
 El prompt del agente se encuentra en `prompts/prompt.txt`. Puede modificarse para ajustar los criterios de evaluación, el formato de salida o el rol del agente sin alterar el código.
+
+## Licencia
+
+Este proyecto está licenciado bajo la [MIT License](LICENSE).

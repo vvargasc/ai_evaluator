@@ -1,3 +1,6 @@
+# Copyright (c) 2026 AI Evaluator Contributors
+# SPDX-License-Identifier: MIT
+
 from pathlib import Path
 import pdfplumber
 

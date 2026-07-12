@@ -1,3 +1,6 @@
+# Copyright (c) 2026 AI Evaluator Contributors
+# SPDX-License-Identifier: MIT
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv
