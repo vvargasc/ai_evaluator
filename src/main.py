@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.file_handler import extract_content
 from src.agent import analyze_document
+from src.config import MAX_TEXT_LENGTH
 
 logging.basicConfig(
     level=logging.INFO,
@@ -48,6 +49,15 @@ def main() -> None:
             logger.error("El archivo está vacío.")
             sys.exit(1)
 
+        if len(content) > MAX_TEXT_LENGTH:
+            logger.error(
+                "Texto extraído demasiado largo: %d caracteres. "
+                "Máximo permitido: %d caracteres (~25K tokens).",
+                len(content),
+                MAX_TEXT_LENGTH,
+            )
+            sys.exit(1)
+
         logger.info("Analizando con Big Pickle...")
         result = analyze_document(content)
 
@@ -68,7 +78,7 @@ def main() -> None:
         logger.error("Error: %s", e)
         sys.exit(1)
     except Exception as e:
-        logger.exception("Error inesperado: %s", e)
+        logger.error("Error inesperado: %s", e)
         sys.exit(1)
 
 

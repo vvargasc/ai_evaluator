@@ -29,7 +29,7 @@ ai_evaluator/
 │   ├── main.py            # Entry point CLI
 │   ├── agent.py           # Agente Big Pickle (OpenCode Zen)
 │   ├── file_handler.py    # Lectura de archivos TXT y PDF
-│   └── config.py          # API key y carga del prompt
+│   └── config.py          # API key, límites y carga del prompt
 ├── prompts/
 │   └── prompt.txt         # Prompt del sistema para Big Pickle
 ├── output/                # Resultados generados (auto-creado)
@@ -44,7 +44,7 @@ ai_evaluator/
 
 | Módulo | Responsabilidad |
 | --- | --- |
-| `config.py` | Carga la `OPENCODE_API_KEY` desde `.env`, define endpoint y modelo, y lee el prompt |
+| `config.py` | Carga la `OPENCODE_API_KEY` desde `.env.local`, define endpoint, modelo y límites, y lee el prompt |
 | `file_handler.py` | Extrae contenido de archivos `.txt` (lectura directa) y `.pdf` (vía pdfplumber) |
 | `agent.py` | Configura el cliente OpenAI compatible con OpenCode Zen y envía el documento para análisis con `big-pickle` |
 | `main.py` | CLI que orquesta el flujo: lectura → análisis → guardado en `output/` |
@@ -53,9 +53,9 @@ ai_evaluator/
 
 | Paquete | Versión | Propósito |
 | --- | --- | --- |
-| `openai` | >= 1.0.0 | Cliente OpenAI compatible con OpenCode Zen |
-| `python-dotenv` | >= 1.0.0 | Carga de variables de entorno desde `.env` |
-| `pdfplumber` | >= 0.11.0 | Extracción de texto de archivos PDF |
+| `openai` | 2.45.0 | Cliente OpenAI compatible con OpenCode Zen |
+| `python-dotenv` | 1.2.2 | Carga de variables de entorno desde `.env.local` |
+| `pdfplumber` | 0.11.10 | Extracción de texto de archivos PDF |
 
 ## Configuración
 
@@ -67,13 +67,13 @@ pip install -r requirements.txt
 
 ### 2. Configurar la API key
 
-Obtener una API key gratuita en [OpenCode Zen](https://opencode.ai/docs/zen) y crear el archivo `.env`:
+Obtener una API key gratuita en [OpenCode Zen](https://opencode.ai/docs/zen) y crear el archivo `.env.local`:
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
-Editar `.env`:
+Editar `.env.local`:
 
 ```
 OPENCODE_API_KEY=tu_api_key_aquí
@@ -109,6 +109,22 @@ Los resultados se guardan en la carpeta `output/` con el formato `analisis_YYYYM
 ## Personalización
 
 El prompt del agente se encuentra en `prompts/prompt.txt`. Puede modificarse para ajustar los criterios de evaluación, el formato de salida o el rol del agente sin alterar el código.
+
+## Límites
+
+| Límite | Valor | Motivo |
+| --- | --- | --- |
+| Tamaño máximo del archivo | 2 MB | Evitar archivos corruptos o excesivamente grandes |
+| Longitud máxima del texto extraído | 100.000 caracteres (~25K tokens) | Controlar costos de tokens en la API |
+
+Estos límites se definen en `src/config.py` (`MAX_FILE_SIZE_BYTES` y `MAX_TEXT_LENGTH`).
+
+## Seguridad
+
+- **Credenciales**: La API key se almacena en `.env.local` (excluido de git). Nunca se commitea al repositorio.
+- **Timeout**: La llamada a la API tiene un timeout de 60 segundos y 2 reintentos automáticos.
+- **Prompt injection**: El contenido del documento se envuelve en delimitadores y se instruye al modelo ignorar instrucciones ajenas al prompt del sistema.
+- **Stack traces**: Los errores inesperados se registran sin exponer el stack trace completo.
 
 ## Licencia
 

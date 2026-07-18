@@ -5,15 +5,21 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+env_local = PROJECT_ROOT / ".env.local"
+if env_local.exists():
+    load_dotenv(env_local)
+else:
+    load_dotenv()
 PROMPTS_DIR = PROJECT_ROOT / "prompts"
 PROMPT_FILE = PROMPTS_DIR / "prompt.txt"
 
 
 OPENCODE_API_BASE = "https://opencode.ai/zen/v1"
 MODEL_ID = "big-pickle"
+MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024  # 2 MB
+MAX_TEXT_LENGTH = 100_000  # ~25K tokens
 
 
 def get_api_key() -> str:

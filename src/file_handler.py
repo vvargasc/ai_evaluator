@@ -4,6 +4,8 @@
 from pathlib import Path
 import pdfplumber
 
+from src.config import MAX_FILE_SIZE_BYTES
+
 
 def read_text_file(path: Path) -> str:
     """Lee el contenido completo de un archivo de texto.
@@ -59,6 +61,13 @@ def extract_content(file_path: str) -> str:
 
     if not path.exists():
         raise FileNotFoundError(f"Archivo no encontrado: {file_path}")
+
+    size = path.stat().st_size
+    if size > MAX_FILE_SIZE_BYTES:
+        raise ValueError(
+            f"Archivo demasiado grande: {size / 1024:.1f} KB. "
+            f"Máximo permitido: {MAX_FILE_SIZE_BYTES / 1024:.0f} KB."
+        )
 
     suffix = path.suffix.lower()
 
