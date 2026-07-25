@@ -17,7 +17,7 @@ PROMPT_FILE = PROMPTS_DIR / "prompt.txt"
 
 
 OPENCODE_API_BASE = "https://opencode.ai/zen/v1"
-MODEL_ID = "big-pickle"
+MODEL_ID = os.getenv("OPENCODE_MODEL", "big-pickle")
 MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024  # 2 MB
 MAX_TEXT_LENGTH = 100_000  # ~25K tokens
 

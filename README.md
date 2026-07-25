@@ -44,7 +44,7 @@ ai_evaluator/
 
 | Módulo | Responsabilidad |
 | --- | --- |
-| `config.py` | Carga la `OPENCODE_API_KEY` desde `.env.local`, define endpoint, modelo y límites, y lee el prompt |
+| `config.py` | Carga la `OPENCODE_API_KEY` y `OPENCODE_MODEL` desde `.env.local`, define endpoint, modelo y límites, y lee el prompt |
 | `file_handler.py` | Extrae contenido de archivos `.txt` (lectura directa) y `.pdf` (vía pdfplumber) |
 | `agent.py` | Configura el cliente OpenAI compatible con OpenCode Zen y envía el documento para análisis con `big-pickle` |
 | `main.py` | CLI que orquesta el flujo: lectura → análisis → guardado en `output/` |
@@ -77,6 +77,7 @@ Editar `.env.local`:
 
 ```
 OPENCODE_API_KEY=tu_api_key_aquí
+OPENCODE_MODEL=big-pickle  # Opcional. Default: big-pickle
 ```
 
 Alternativamente, exportar la variable de entorno:

@@ -5,6 +5,12 @@ Todas las Notas destacadas de este proyecto se documentarán en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/),
 y el proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.2.0] - 2026-07-25
+
+### Agregado
+
+- Variable de entorno `OPENCODE_MODEL` para configurar el modelo a utilizar (default: `big-pickle`).
+
 ## [1.1.0] - 2026-07-18
 
 ### Agregado
