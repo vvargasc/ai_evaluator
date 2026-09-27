@@ -4,7 +4,7 @@ Agente de Gen AI construido con Big Pickle (OpenCode Zen) que analiza especifica
 
 ## Funcionalidad
 
-El agente recibe un archivo (`.txt` o `.pdf`) con una especificación de aplicación y evalúa:
+El agente recibe un archivo (`.txt`, `.pdf`, `.docx`, `.doc`, `.odt`, `.ods` u `.odp`) con una especificación de aplicación y evalúa:
 
 1. Si la aplicación requiere **Generative AI**, **Machine Learning** o **automatización tradicional**.
 2. Si la solución es **híbrida** (mezcla de metodologías).
@@ -28,7 +28,7 @@ ai_evaluator/
 │   ├── __init__.py        # Package marker
 │   ├── main.py            # Entry point CLI
 │   ├── agent.py           # Agente Big Pickle (OpenCode Zen)
-│   ├── file_handler.py    # Lectura de archivos TXT y PDF
+│   ├── file_handler.py    # Lectura de archivos TXT, PDF, DOCX, DOC, ODT, ODS y ODP
 │   └── config.py          # API key, límites y carga del prompt
 ├── prompts/
 │   └── prompt.txt         # Prompt del sistema para Big Pickle
@@ -45,7 +45,7 @@ ai_evaluator/
 | Módulo | Responsabilidad |
 | --- | --- |
 | `config.py` | Carga la `OPENCODE_API_KEY` y `OPENCODE_MODEL` desde `.env.local`, define endpoint, modelo y límites, y lee el prompt |
-| `file_handler.py` | Extrae contenido de archivos `.txt` (lectura directa) y `.pdf` (vía pdfplumber) |
+| `file_handler.py` | Extrae contenido de archivos `.txt`, `.pdf`, `.docx`, `.doc`, `.odt`, `.ods` y `.odp` |
 | `agent.py` | Configura el cliente OpenAI compatible con OpenCode Zen y envía el documento para análisis con `big-pickle` |
 | `main.py` | CLI que orquesta el flujo: lectura → análisis → guardado en `output/` |
 
@@ -53,9 +53,17 @@ ai_evaluator/
 
 | Paquete | Versión | Propósito |
 | --- | --- | --- |
-| `openai` | 2.45.0 | Cliente OpenAI compatible con OpenCode Zen |
-| `python-dotenv` | 1.2.2 | Carga de variables de entorno desde `.env.local` |
+| `openai` | 3.19.2 | Cliente OpenAI compatible con OpenCode Zen |
+| `python-dotenv` | 1.2.3 | Carga de variables de entorno desde `.env.local` |
 | `pdfplumber` | 0.11.10 | Extracción de texto de archivos PDF |
+| `python-docx` | 1.2.0 | Extracción de texto de archivos DOCX |
+| `odfpy` | 1.4.1 | Extracción de texto de archivos ODT, ODS y ODP (LibreOffice) |
+
+> **Nota:** Para archivos `.doc` (formato legacy) se requiere instalar `antiword` o `catdoc` en el sistema:
+> ```bash
+> # Debian/Ubuntu
+> sudo apt install antiword
+> ```
 
 ## Configuración
 
@@ -94,6 +102,15 @@ python src/main.py documento.txt
 
 # Analizar un archivo PDF
 python src/main.py documento.pdf
+
+# Analizar un archivo Word
+python src/main.py documento.docx
+
+# Analizar un archivo Word legacy
+python src/main.py documento.doc
+
+# Analizar un archivo LibreOffice
+python src/main.py documento.odt
 ```
 
 ### Ejemplo de salida

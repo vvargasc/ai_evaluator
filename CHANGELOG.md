@@ -5,6 +5,22 @@ Todas las Notas destacadas de este proyecto se documentarán en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/),
 y el proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.3.0] - 2026-09-27
+
+### Agregado
+
+- Soporte para archivos `.docx` (vía `python-docx`).
+- Soporte para archivos `.doc` (vía `antiword` o `catdoc`).
+- Soporte para archivos `.odt`, `.ods` y `.odp` (vía `odfpy`).
+- Nota en README sobre instalación de `antiword` o `catdoc` para archivos `.doc`.
+
+### Actualizado
+
+- `openai` de 2.45.0 a 3.19.2.
+- `python-dotenv` de 1.2.2 a 1.2.3.
+- `python-docx` de 1.1.2 a 1.2.0.
+- README con nuevos formatos, dependencias y ejemplos de uso.
+
 ## [1.2.0] - 2026-07-25
 
 ### Agregado
